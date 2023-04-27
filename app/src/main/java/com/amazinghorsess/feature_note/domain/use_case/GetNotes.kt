@@ -15,9 +15,11 @@ class GetNotes(private val repository: NoteRepository) {
             when (noteOrder.orderType) {
                 is OrderType.Ascending -> {
                     when (noteOrder) {
+
                         is NoteOrder.Title -> notes.sortedBy { it.title.lowercase() }
                         is NoteOrder.Date -> notes.sortedBy { it.timestamp }
                         is NoteOrder.Color -> notes.sortedBy { it.color }
+
                     }
                 }
                 is OrderType.Descending -> {

@@ -5,7 +5,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.amazinghorsess.feature_note.data.data_source.NoteDao
 import com.amazinghorsess.feature_note.data.data_source.NoteDatabase
 import com.amazinghorsess.feature_note.domain.model.Note
-import com.google.common.truth.Truth.assertThat
+
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -60,7 +60,7 @@ class NoteDaoTest {
             val noteListUpdated = sut.getAllNotes().first()
 
             // assert
-            assertThat(noteListUpdated).isEmpty()
+            assert(noteListUpdated).isEmpty()
         }
     }
 
