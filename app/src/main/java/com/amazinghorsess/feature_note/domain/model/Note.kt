@@ -26,3 +26,5 @@ data class Note(
             PastelGreen)
     }
 }
+
+class InvalidNoteException(message: String): Exception(message)

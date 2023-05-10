@@ -12,3 +12,5 @@ val PastelPink = Color(0xFFE3B7D2)
 val PastelBeige = Color(0xFFF6CEBF)
 val PastelGreen = Color(0xFFC7E9B0)
 val PastelRed = Color(0xFFFD8A8A)
+
+val buttonColor = Color(0xFFFAA403)

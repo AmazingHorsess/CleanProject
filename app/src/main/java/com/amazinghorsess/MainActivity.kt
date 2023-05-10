@@ -10,6 +10,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.amazinghorsess.feature_note.presentation.notes.NotesScreen
+import com.amazinghorsess.feature_note.presentation.notes.components.OrderSelection
+import com.amazinghorsess.utils.NoteOrder
+import com.amazinghorsess.utils.OrderType
 import com.amazinghorsess.utils.theme.CleanProjectTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,22 +26,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    NotesScreen()
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    CleanProjectTheme {
-        Greeting("Android")
-    }
-}
