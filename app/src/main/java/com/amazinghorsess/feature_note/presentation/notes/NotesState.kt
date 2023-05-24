@@ -8,5 +8,6 @@ data class NotesState(
     val notes: List<Note> = emptyList(),
     val notesOrder: NoteOrder = NoteOrder.Date(OrderType.Descending),
     val isOrderSectionVisible: Boolean = false,
-    val isGrid: Boolean = true
+    val isGrid: Boolean = true,
+    val isToggledButton: Boolean = true
     )

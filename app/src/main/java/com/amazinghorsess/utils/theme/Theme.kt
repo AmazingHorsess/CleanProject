@@ -1,21 +1,31 @@
 package com.amazinghorsess.utils.theme
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 
+@SuppressLint("ConflictingOnColor")
 private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    background = DarkSurfaceColor,
+    primary = DarkObjectColor,
+    primaryVariant = DarkDividerColor,
+    secondary = LightSurfaceColor,
+    surface = DarkSurfaceColor,
+    onSurface = DarkDividerColor,
+    secondaryVariant = DarkDividerColor
 )
 
+@SuppressLint("ConflictingOnColor")
 private val LightColorPalette = lightColors(
-    primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = LightObjectColor,
+    primaryVariant = LightDividerColor,
+    secondary = Teal200,
+    surface = LightSurfaceColor,
+    onSurface = LightDividerColor,
+    secondaryVariant = LightDividerColor
 
     /* Other default colors to override
     background = Color.White,

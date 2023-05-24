@@ -9,4 +9,8 @@ sealed class NotesEvent{
     object RestoreNote: NotesEvent()
     object ToggleOrderSection: NotesEvent()
     object ToggleListView: NotesEvent()
+    object ToggleButton: NotesEvent()
+
+
+
 }

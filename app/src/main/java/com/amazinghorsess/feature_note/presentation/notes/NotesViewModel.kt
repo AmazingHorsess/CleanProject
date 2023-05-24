@@ -61,17 +61,18 @@ class NotesViewModel @Inject constructor(
                  }
 
             }
-
             is NotesEvent.ToggleOrderSection -> {
-                _state.value= state.value.copy(
+                _state.value = state.value.copy(
                     isOrderSectionVisible = !state.value.isOrderSectionVisible
-                )
-
-
-            }
+                )}
             is NotesEvent.ToggleListView -> {
                 _state.value = state.value.copy(
                     isGrid = !state.value.isGrid
+                )
+            }
+            is NotesEvent.ToggleButton -> {
+                _state.value = state.value.copy(
+                    isToggledButton = !state.value.isToggledButton
                 )
             }
         }

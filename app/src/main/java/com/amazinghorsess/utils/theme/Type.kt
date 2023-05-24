@@ -11,29 +11,35 @@ import com.amazinghorsess.R
 val ItterTypography =  FontFamily(
     Font(R.font.interregualr, FontWeight.Normal)
 )
+val segoeUi = FontFamily(
+    Font(R.font.segoui)
+)
+val segoeUiBold = FontFamily(
+    Font(R.font.segoebold)
+)
 
 
 
 // Set of Material typography styles to start with
 val Typography = Typography(
     h2 = TextStyle(
-        fontFamily = ItterTypography,
-        fontSize = 30.sp
+        fontFamily = segoeUiBold,
+        fontSize = 40.sp
 
     ),
     h1 = TextStyle(
-        fontFamily = ItterTypography,
+        fontFamily = segoeUi,
         fontSize = 20.sp
 
     ),
     body1 = TextStyle(
-        fontFamily = ItterTypography,
-        fontSize = 14.sp
+        fontFamily = segoeUiBold,
+        fontSize = 20.sp
 
     ),
     body2 = TextStyle(
-        fontFamily = ItterTypography,
-        fontSize = 12.sp
+        fontFamily = segoeUi,
+        fontSize = 14.sp
 
     ),
 

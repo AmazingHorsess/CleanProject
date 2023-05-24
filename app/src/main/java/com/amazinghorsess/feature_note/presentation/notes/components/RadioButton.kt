@@ -4,6 +4,7 @@ import android.widget.RadioButton
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.RadioButton
 import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.Text
@@ -20,7 +21,7 @@ fun RadioButton(
     onSelect: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Row(
+        Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
 
@@ -29,13 +30,15 @@ fun RadioButton(
             selected = selected,
             onClick = onSelect,
             colors = RadioButtonDefaults.colors(
-                selectedColor = androidx.compose.ui.graphics.Color.White, /*TODO Change color*/
-                unselectedColor = androidx.compose.ui.graphics.Color.LightGray, /*TODO Change color*/
+                selectedColor = MaterialTheme.colors.primary,
+                unselectedColor = MaterialTheme.colors.primary, /*TODO Change color*/
                 )
         )
 
         Text(
-            text = text
+            text = text,
+            color = MaterialTheme.colors.primary
+
         )
 
     }
