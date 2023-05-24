@@ -18,12 +18,17 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.BottomAppBar
 import androidx.compose.material.Divider
+import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -31,6 +36,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.rememberScaffoldState
@@ -42,6 +48,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.ExperimentalTextApi
@@ -79,11 +86,12 @@ fun NotesScreen(
     val segoeBold = FontFamily(Font(R.font.segoebold))
     val darkTheme = isSystemInDarkTheme()
     Scaffold(
-        bottomBar = {
 
-        },
         floatingActionButton = {
             FloatingActionButton(
+                modifier = Modifier
+                    .size(64.dp),
+                shape = CircleShape,
                 onClick = {
                     TODO()
                 },
@@ -93,6 +101,218 @@ fun NotesScreen(
             }
 
         },
+        floatingActionButtonPosition = FabPosition.End,
+        isFloatingActionButtonDocked = true,
+        topBar = {
+                 TopAppBar(
+                     backgroundColor = MaterialTheme.colors.surface,
+                 ) {
+
+                         Text(
+
+                             text = buildAnnotatedString {
+                                 withStyle(
+                                     SpanStyle(
+                                         color = MaterialTheme.colors.primary,
+                                         fontSize = 26.sp,
+                                         fontFamily = segoeBold
+
+                                     )
+                                 ) {
+                                     append("My")
+                                 }
+                                 withStyle(
+                                     SpanStyle(
+                                         brush = Brush.linearGradient(
+
+                                             colors = listOf(
+                                                 accentLeft,
+                                                 accentCenter,
+                                                 accentRight
+                                             ),
+                                             // Конец градиента - середина высоты последней буквы
+
+                                         ),
+                                         fontSize = 26.sp,
+                                         fontFamily = segoeBold
+                                     )
+                                 ) {
+                                     append(" Notes")
+                                 }
+
+                             }
+                         )
+                         Spacer(modifier = Modifier.padding(horizontal = 18.dp))
+
+                         ToggleIconButton(
+                             onClick = {
+                                 viewModel.onEvent(NotesEvent.ToggleListView)
+                                 viewModel.onEvent(NotesEvent.ToggleButton) },
+                             icon = {
+                                 Icon(
+                                     painter = painterResource(R.drawable.list),
+                                     contentDescription = "Sort",
+                                     tint = MaterialTheme.colors.primary,
+                                     modifier = Modifier.size(32.dp)
+                                 )
+
+                             },
+                             alternativeIcon = {
+                                 Icon(
+                                     painter = painterResource(R.drawable.grid),
+                                     contentDescription = "Sort",
+                                     tint = MaterialTheme.colors.primary,
+                                     modifier = Modifier.size(32.dp)
+                                 )
+
+
+                             }
+
+                         )
+                         Spacer(modifier = Modifier.padding(start = 18.dp))
+
+
+
+
+
+                         IconButton(
+
+                             onClick = {
+                                 viewModel.onEvent(NotesEvent.ToggleOrderSection)
+                             }) {
+                             Icon(
+                                 painter = painterResource(R.drawable.sort),
+                                 contentDescription = "Sort",
+                                 tint = MaterialTheme.colors.primary,
+                                 modifier = Modifier.size(32.dp)
+                             )
+
+                         }
+
+                         Spacer(modifier = Modifier.padding(horizontal = 26.dp))
+
+                         IconButton(
+
+                             onClick = {
+                                 /*TODO*/
+                             }) {
+                             Icon(
+                                 painter = painterResource(R.drawable.settings),
+                                 contentDescription = "Sort",
+                                 tint = MaterialTheme.colors.primary,
+                                 modifier = Modifier.size(32.dp)
+                             )
+
+                         }
+
+
+
+
+                     AnimatedVisibility(
+                         visible = state.isOrderSectionVisible,
+                         enter = fadeIn() + slideInVertically(tween(250)),
+                         exit = fadeOut(targetAlpha = 0f) + slideOutHorizontally (tween(200))
+                     ) {
+                         OrderSelection(
+                             modifier = Modifier
+                                 .fillMaxWidth()
+                                 .padding(vertical = 16.dp),
+                             noteOrder = state.notesOrder,
+                             onOrderChange = {
+                                 viewModel.onEvent(NotesEvent.Order(it))
+                             }
+                         )
+                     }
+                     Spacer(modifier = Modifier.padding(vertical = 6.dp))
+                     Divider(
+                         color = MaterialTheme.colors.onSurface,
+                         thickness = 4.dp,
+                         modifier = Modifier.clip(Shapes.medium),
+
+                         )
+                     Spacer(modifier = Modifier
+                         .fillMaxWidth()
+                         .padding(vertical = 12.dp))
+
+                 }
+        },
+        bottomBar = {
+
+            BottomAppBar(
+                elevation = 16.dp,
+                backgroundColor = MaterialTheme.colors.surface,
+
+                cutoutShape = RoundedCornerShape(50.dp),
+                contentPadding = PaddingValues(horizontal = 82.dp),
+
+            ) {
+
+                ToggleIconButton(
+                    modifier = Modifier.weight(1f),
+                    onClick = {
+                        viewModel.onEvent(NotesEvent.ToggleListView)
+                        viewModel.onEvent(NotesEvent.ToggleButton) },
+                    icon = {
+                        Icon(
+                            painter = painterResource(R.drawable.list),
+                            contentDescription = "Sort",
+                            tint = MaterialTheme.colors.primary,
+                            modifier = Modifier.size(32.dp)
+                        )
+
+                    },
+                    alternativeIcon = {
+                        Icon(
+                            painter = painterResource(R.drawable.grid),
+                            contentDescription = "Sort",
+                            tint = MaterialTheme.colors.primary,
+                            modifier = Modifier.size(32.dp)
+                        )
+
+
+                    }
+
+                )
+
+
+                ToggleIconButton(
+                    modifier = Modifier.weight(1f),
+                    onClick = {
+                        viewModel.onEvent(NotesEvent.ToggleListView)
+                        viewModel.onEvent(NotesEvent.ToggleButton) },
+                    icon = {
+                        Icon(
+                            painter = painterResource(R.drawable.list),
+                            contentDescription = "Sort",
+                            tint = MaterialTheme.colors.primary,
+                            modifier = Modifier.size(32.dp)
+                        )
+
+                    },
+                    alternativeIcon = {
+                        Icon(
+                            painter = painterResource(R.drawable.grid),
+                            contentDescription = "Sort",
+                            tint = MaterialTheme.colors.primary,
+                            modifier = Modifier.size(32.dp)
+                        )
+
+
+                    }
+
+                )
+
+
+
+
+
+            }
+
+
+        },
+        backgroundColor = MaterialTheme.colors.surface,
+        contentColor = MaterialTheme.colors.surface,
+
 
         scaffoldState = scaffoldState
     ) {
@@ -212,8 +432,8 @@ fun NotesScreen(
                 }
                 AnimatedVisibility(
                     visible = state.isOrderSectionVisible,
-                    enter = fadeIn() + slideInVertically(),
-                    exit = fadeOut() + slideOutVertically()
+                    enter = fadeIn() + slideInVertically(tween(250)),
+                    exit = fadeOut(targetAlpha = 0f) + slideOutHorizontally (tween(200))
                 ) {
                     OrderSelection(
                         modifier = Modifier
@@ -249,7 +469,7 @@ fun NotesScreen(
                             verticalArrangement = Arrangement.spacedBy(14.dp),
                             horizontalArrangement = Arrangement.spacedBy(20.dp)
                         ) {
-                            items(10) {
+                            items(8) {
                                 GridNoteItem()
                             }
                         }

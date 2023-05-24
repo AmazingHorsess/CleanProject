@@ -1,6 +1,6 @@
 package com.amazinghorsess.feature_note.presentation.add_edit_note
 
-data class NoteTextFieldState (
+sealed class NoteTextFieldState (
     val text: String = "",
     val hint: String = "",
     val isHintVisible: Boolean = true,

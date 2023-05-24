@@ -57,7 +57,7 @@ fun OrderSelection(
                 )
                 RadioButton(
                     text = "Descending",
-                    selected = noteOrder is NoteOrder.Date,
+                    selected = noteOrder.orderType is OrderType.Descending,
                     onSelect = { onOrderChange(noteOrder.copy(OrderType.Descending)) }
                 )
 
